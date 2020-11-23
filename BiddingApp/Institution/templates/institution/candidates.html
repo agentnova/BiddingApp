@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'institution/base.html' %}
+
+{% block body_block %}
+    <div class="container">
+    <h1>candidates</h1>
+        <div class="row">
+            {% for candidate in candidates %}
+                <div class="col-lg-4" style="margin-top: 2%;">
+                    <div class="card">
+                        <h5 class="card-header">{{ candidate.first_name }}</h5>
+                        <div class="card-body">
+                            <p class="card-title">Job title : {{ candidate.title }}</p>
+                            <p class="card-title">Email : {{ candidate.email }}</p>
+                            <a class="btn btn-primary" href="{% url 'candidateview' candidate.id %}">View</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

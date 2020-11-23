@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'trainer/base.html' %}
+
+{% block body_block %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <h1 align="center">Available jobs</h1>
+            </div>
+            <div class="col-4">
+                <form class="form-inline" method="post" style="margin-top: 2%;float:right;">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{ field }}
+                        {{ field.errors }}&nbsp;
+                    {% endfor %}
+
+                    <input type="submit" class="btn btn-primary" value="Filter">
+                </form>
+            </div>
+        </div>
+
+
+        <div class="row">
+            {% for job in jobs %}
+                <div class="col-lg-4" style="margin-top: 2%;">
+                    <div class="card">
+                        <h5 class="card-header"><b>{{ job.title }}</b></h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Required Skill : {{ job.skill }}</h5>
+                            <h5 class="card-title">Required Experience : {{ job.experience }}</h5>
+                            <h5 class="card-title">Expected Salary : {{ job.salary }}</h5>
+                            <a class="btn btn-primary" href="{% url 'applyjob' job.id %}">Apply</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

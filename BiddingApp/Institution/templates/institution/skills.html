@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends "institution/base.html" %}
+
+{% block body_block %}
+    <h1 align="center">Skills</h1>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Skills</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for data in skills %}
+                        <tr>
+                            <td>{{ data.skill }}</td>
+                            <td><a class="atag" href="{% url 'editskill' data.id %}">Edit</a>--<a
+                                    href="{% url 'deleteskill' data.id %}" class="atag">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+            <div class="col-4"></div>
+        </div>
+
+    </div>
+
+{% endblock %}
